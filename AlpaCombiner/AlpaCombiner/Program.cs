@@ -8,6 +8,8 @@ namespace AlpaCombiner
 {
     static class Program
     {
+        public static readonly string version = "1.0.0";
+
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
@@ -16,7 +18,7 @@ namespace AlpaCombiner
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainWindow());
         }
     }
 }
