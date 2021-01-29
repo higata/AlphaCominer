@@ -8,7 +8,7 @@ namespace AlpaCombiner
 {
     static class Program
     {
-        public static readonly string version = "1.0.0";
+        public static readonly string version = "1.0.1";
 
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
