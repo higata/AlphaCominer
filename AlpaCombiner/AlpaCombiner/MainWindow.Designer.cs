@@ -75,6 +75,7 @@
             this.srcImagePath.ReadOnly = true;
             this.srcImagePath.Size = new System.Drawing.Size(302, 19);
             this.srcImagePath.TabIndex = 99;
+            this.srcImagePath.Click += new System.EventHandler(this.SrcImageOpenButton_Click);
             // 
             // srcImageOpenButton
             // 
@@ -154,6 +155,7 @@
             this.grayImagePath.ReadOnly = true;
             this.grayImagePath.Size = new System.Drawing.Size(302, 19);
             this.grayImagePath.TabIndex = 99;
+            this.grayImagePath.Click += new System.EventHandler(this.GrayImageOpenButton_Click);
             // 
             // leftTableLayout
             // 
