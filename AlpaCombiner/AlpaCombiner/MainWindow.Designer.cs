@@ -65,6 +65,8 @@
             this.srcImagebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.srcImagebox.TabIndex = 0;
             this.srcImagebox.TabStop = false;
+            this.srcImagebox.DragDrop += new System.Windows.Forms.DragEventHandler(this.SrcImagebox_DragDrop);
+            this.srcImagebox.DragEnter += new System.Windows.Forms.DragEventHandler(this.ImageBox_DragEnter);
             // 
             // srcImagePath
             // 
@@ -134,6 +136,8 @@
             this.grayImagebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.grayImagebox.TabIndex = 0;
             this.grayImagebox.TabStop = false;
+            this.grayImagebox.DragDrop += new System.Windows.Forms.DragEventHandler(this.GrayImagebox_DragDrop);
+            this.grayImagebox.DragEnter += new System.Windows.Forms.DragEventHandler(this.ImageBox_DragEnter);
             // 
             // grayImageOpenButton
             // 

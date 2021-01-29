@@ -34,6 +34,8 @@ namespace AlpaCombiner
             {
                 this.ClientSize = config.LastWindowSize;
             }
+            srcImagebox.AllowDrop = true;
+            grayImagebox.AllowDrop = true;
         }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -137,5 +139,60 @@ namespace AlpaCombiner
                 }
             }
         }
+
+        private void SrcImagebox_DragDrop(object sender, DragEventArgs e)
+        {
+            var file = DropFile(e);
+            if (file != null)
+            {
+                config.LastLoadedSrcImagePath = Path.GetDirectoryName(file);
+                config.Save();
+                srcImagePath.Text = file;
+                srcImagebox.Image = Image.FromFile(file);
+            }
+            else
+            {
+                SystemSounds.Beep.Play();
+            }
+        }
+
+        private void GrayImagebox_DragDrop(object sender, DragEventArgs e)
+        {
+            var file = DropFile(e);
+            if (file != null)
+            {
+                config.LastLoadedSrcImagePath = Path.GetDirectoryName(file);
+                config.Save();
+                grayImagePath.Text = file;
+                grayImagebox.Image = Image.FromFile(file);
+            }
+            else
+            {
+                SystemSounds.Beep.Play();
+            }
+        }
+
+        private string DropFile(DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) == false) return null;
+            var file = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (file[0].ToLower().EndsWith("png"))
+            {
+                return file[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private void ImageBox_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.All;
+            }
+        }
+
     }
 }
