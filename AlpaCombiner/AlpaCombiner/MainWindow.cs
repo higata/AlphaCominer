@@ -44,25 +44,31 @@ namespace AlpaCombiner
 
         private void SrcImageOpenButton_Click(object sender, EventArgs e)
         {
-            var img = OpenPNGFileImage(true);
+            var img = OpenPNGFileImage(config.LastLoadedSrcImagePath);
             if (img != null)
             {
-                srcImagebox.Image = img;
+                config.LastLoadedSrcImagePath = Path.GetDirectoryName(img);
+                config.Save();
+                srcImagePath.Text = img;
+                srcImagebox.Image = Image.FromFile(img);
             }
         }
         private void GrayImageOpenButton_Click(object sender, EventArgs e)
         {
-            var img = OpenPNGFileImage(false);
+            var img = OpenPNGFileImage(config.LastLoadedGrayscaleImagePath);
             if (img != null)
             {
-                grayImagebox.Image = img;
+                config.LastLoadedGrayscaleImagePath = Path.GetDirectoryName(img);
+                config.Save();
+                grayImagePath.Text = img;
+                grayImagebox.Image = Image.FromFile(img);
             }
         }
-        private Image OpenPNGFileImage(bool isSrc)
+        private string OpenPNGFileImage(string basePath)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                string p = isSrc ? config.LastLoadedSrcImagePath : config.LastLoadedGrayscaleImagePath;
+                string p = basePath;
                 if (p == null
                     || p.Equals("")
                     || Directory.Exists(p) == false)
@@ -79,19 +85,7 @@ namespace AlpaCombiner
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Console.WriteLine(openFileDialog.FileName);
-
-                    if (isSrc)
-                    {
-                        config.LastLoadedSrcImagePath = Path.GetDirectoryName(openFileDialog.FileName);
-                    }
-                    else
-                    {
-                        config.LastLoadedGrayscaleImagePath = Path.GetDirectoryName(openFileDialog.FileName);
-                    }
-                    config.Save();
-
-                    return Image.FromFile(openFileDialog.FileName);
+                    return openFileDialog.FileName;
                 }
             }
             return null;
