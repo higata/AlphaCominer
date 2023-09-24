@@ -52,7 +52,11 @@ namespace AlpaCombiner
                 config.LastLoadedSrcImagePath = Path.GetDirectoryName(img);
                 config.Save();
                 srcImagePath.Text = img;
-                srcImagebox.Image = Image.FromFile(img);
+                using (FileStream fs = File.OpenRead(img))
+                {
+                    srcImagebox.Image = Image.FromStream(fs, false, false);
+                    fs.Close();
+                }
             }
         }
         private void GrayImageOpenButton_Click(object sender, EventArgs e)
@@ -63,7 +67,11 @@ namespace AlpaCombiner
                 config.LastLoadedGrayscaleImagePath = Path.GetDirectoryName(img);
                 config.Save();
                 grayImagePath.Text = img;
-                grayImagebox.Image = Image.FromFile(img);
+                using (FileStream fs = File.OpenRead(img))
+                {
+                    grayImagebox.Image = Image.FromStream(fs, false, false);
+                    fs.Close();
+                }
             }
         }
         private string OpenPNGFileImage(string basePath)
@@ -148,7 +156,12 @@ namespace AlpaCombiner
                 config.LastLoadedSrcImagePath = Path.GetDirectoryName(file);
                 config.Save();
                 srcImagePath.Text = file;
-                srcImagebox.Image = Image.FromFile(file);
+
+                using (FileStream fs = File.OpenRead(file))
+                {
+                    srcImagebox.Image = Image.FromStream(fs, false, false);
+                    fs.Close();
+                }
             }
             else
             {
@@ -164,7 +177,11 @@ namespace AlpaCombiner
                 config.LastLoadedSrcImagePath = Path.GetDirectoryName(file);
                 config.Save();
                 grayImagePath.Text = file;
-                grayImagebox.Image = Image.FromFile(file);
+                using (FileStream fs = File.OpenRead(file))
+                {
+                    grayImagebox.Image = Image.FromStream(fs, false, false);
+                    fs.Close();
+                }
             }
             else
             {
@@ -193,6 +210,5 @@ namespace AlpaCombiner
                 e.Effect = DragDropEffects.All;
             }
         }
-
     }
 }
